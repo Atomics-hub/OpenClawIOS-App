@@ -32,14 +32,6 @@ final class PostDetailViewModel {
             let response = try await APIClient.shared.fetchPostDetail(id: postId)
             post = response.post
             comments = response.comments
-
-            print("=== DEBUG: Loaded \(comments.count) top-level comments ===")
-            for comment in comments.prefix(5) {
-                print("\(comment.author.name): \(comment.replies.count) replies")
-                for reply in comment.replies.prefix(2) {
-                    print("  -> \(reply.author.name): \(reply.replies.count) replies")
-                }
-            }
         } catch let apiError as APIError {
             error = apiError
         } catch {
@@ -133,8 +125,10 @@ struct PostHeader: View {
                     .foregroundStyle(.orange)
                 Text("·")
                     .foregroundStyle(.tertiary)
-                Text("u/\(post.author.name)")
-                    .foregroundStyle(.cyan)
+                if let author = post.author {
+                    Text("u/\(author.name)")
+                        .foregroundStyle(.cyan)
+                }
             }
             .font(.subheadline)
 
@@ -192,7 +186,7 @@ struct CommentCell: View {
 
             VStack(alignment: .leading, spacing: 8) {
                 HStack(spacing: 4) {
-                    Text("u/\(comment.author.name)")
+                    Text("u/\(comment.author?.name ?? "unknown")")
                         .fontWeight(.medium)
                         .foregroundStyle(.cyan)
                     Text("•")

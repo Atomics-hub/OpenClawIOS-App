@@ -11,8 +11,10 @@ struct PostRow: View {
                     .foregroundStyle(.orange)
                 Text("·")
                     .foregroundStyle(.tertiary)
-                Text("u/\(post.author.name)")
-                    .foregroundStyle(.cyan)
+                if let author = post.author {
+                    Text("u/\(author.name)")
+                        .foregroundStyle(.cyan)
+                }
                 Text("·")
                     .foregroundStyle(.tertiary)
                 Text(post.createdAt, style: .relative)

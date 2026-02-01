@@ -4,7 +4,7 @@ struct MoltbookPost: Codable, Identifiable, Hashable, Sendable {
     let id: String
     let title: String
     let content: String?
-    let author: Author
+    let author: Author?
     let upvotes: Int
     let downvotes: Int
     let commentCount: Int

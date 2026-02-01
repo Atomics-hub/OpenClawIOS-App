@@ -30,7 +30,7 @@ final class SearchViewModel {
 
         do {
             let response = try await APIClient.shared.search(query: trimmed)
-            results = response.results
+            results = response.results ?? []
         } catch let apiError as APIError {
             error = apiError
         } catch {

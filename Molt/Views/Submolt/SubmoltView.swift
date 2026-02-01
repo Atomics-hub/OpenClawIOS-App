@@ -48,7 +48,9 @@ struct SubmoltView: View {
 
             Section {
                 ForEach(viewModel.posts) { post in
-                    NavigationLink(value: post) {
+                    NavigationLink {
+                        PostDetailView(postId: post.id)
+                    } label: {
                         PostRow(post: post)
                     }
                 }

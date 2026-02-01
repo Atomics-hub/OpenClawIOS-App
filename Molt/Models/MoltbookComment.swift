@@ -3,7 +3,7 @@ import Foundation
 struct MoltbookComment: Codable, Identifiable, Sendable {
     let id: String
     let content: String
-    let author: Author
+    let author: Author?
     let parentId: String?
     let upvotes: Int
     let downvotes: Int
@@ -20,7 +20,7 @@ struct MoltbookComment: Codable, Identifiable, Sendable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         id = try container.decode(String.self, forKey: .id)
         content = try container.decode(String.self, forKey: .content)
-        author = try container.decode(Author.self, forKey: .author)
+        author = try container.decodeIfPresent(Author.self, forKey: .author)
         parentId = try container.decodeIfPresent(String.self, forKey: .parentId)
         upvotes = try container.decode(Int.self, forKey: .upvotes)
         downvotes = try container.decode(Int.self, forKey: .downvotes)

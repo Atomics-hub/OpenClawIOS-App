@@ -44,9 +44,10 @@ struct PostReference: Codable, Sendable {
 
 struct SearchResponse: Codable, Sendable {
     let success: Bool
-    let query: String
-    let type: String
-    let results: [SearchResult]
+    let query: String?
+    let type: String?
+    let results: [SearchResult]?
+    let error: String?
 }
 
 struct AgentProfileResponse: Codable, Sendable {
